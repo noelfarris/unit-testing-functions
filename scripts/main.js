@@ -9,7 +9,11 @@
  * If the input is invalid throw an 'Invalid Input' exception.
  */
 function checkData(inputString) {
-	// your code goes here
+	if(inputString.length === 3) {
+		return true;
+	} else {
+		return false;
+	}
 }
 
 /*
@@ -20,7 +24,13 @@ function checkData(inputString) {
  * If the input is invalid throw an 'Invalid Input' exception.
  */
 function concatenateArrays(a, b) {
-	// your code goes here
+	var concat = a.concat(b);
+	console.log(concat);
+	if(typeof a !== 'object' && typeof b !== 'object') {
+		throw 'Invalid input';
+	} else {
+	return concat;
+	}
 }
 
 /*
