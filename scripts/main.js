@@ -236,7 +236,7 @@ function findMaxDiff(array) {
  */
 function insertDashes(string) {
 	var arra = [];
-	string.push('-');
+	string.push('', '-');
 	var dash = arra.join('');
 	return dash;
 }
@@ -251,15 +251,10 @@ function insertDashes(string) {
  *
  * If the input is invalid throw an 'Invalid Input' exception.
  */
-function mySubstring(string, a, b) {
-	var sub = []
-	var array = string.split('');
-	for(var i = 0; i < array.length; i++) {
-		if(array[i] >= a && array[i] <= b) {
-			sub.push(array[i]);
-		}
-	}
-	return sub.join('');
+function mySubstring(string, start, end) {
+    var difference = start - end;
+   var newString = string.slice(start, difference);
+   return newString;
 }
 /*
  * PROBLEM `splitSwap`: (hard)
