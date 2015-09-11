@@ -43,7 +43,8 @@ function concatenateArrays(a, b) {
  * If the input is invalid throw an 'Invalid Input' exception.
  */
 function fixProperNoun(noun) {
-	// your code goes here
+	var fixNoun = noun.toLowerCase();
+	return fixNoun.charAt(0).toUpperCase() + fixNoun.substring(1);
 }
 
 /*
@@ -54,7 +55,9 @@ function fixProperNoun(noun) {
  * If the input is invalid throw an 'Invalid Input' exception.
  */
 function sortLetters(inputString) {
-	// your code goes here
+	var strArray = inputString.split('').sort();
+	var intSort = strArray.join('');
+	return intSort;
 }
 
 /*
@@ -65,7 +68,14 @@ function sortLetters(inputString) {
  * If the input is invalid throw an 'Invalid Input' exception.
  */
 function absVal(integer) {
-	// your code goes here
+	var x = integer
+	if(x < 0) {
+		x = x*(-1);
+	} else if (typeof x !== 'number') {
+		throw 'Invalid input';
+	}
+
+	return x;
 }
 
 /*
@@ -75,6 +85,15 @@ function absVal(integer) {
  *
  * If the input is invalid throw an 'Invalid Input' exception.
  */
+ function myMin(a, b) {
+ 	if(typeof a !== 'number' && typeof b !== 'number') {
+		throw 'Invalid input';
+ 	} else if(a > b) {
+ 		return a, b;
+ 	} else {
+ 		return b, a;
+ 	}
+ }
 
 /*
  * PROBLEM `myMax`: (normal) - Actual Interview Question
@@ -85,6 +104,13 @@ function absVal(integer) {
  *
  * Insane mode: do this without using a for loop.
  */
+ function myMax(array) {
+ 	var sorted = array.sort()
+ 	if (typeof array !== 'object') {
+ 		throw 'Invalid input';
+ 	}
+ 	return sorted[sorted.length-1];
+ }
 
 /*
  * PROBLEM `getMonth`: (normal)
@@ -97,12 +123,25 @@ function absVal(integer) {
  *
  * If the input is invalid throw an 'Invalid Input' exception.
  */
-
+function getMonth(integer) {
+	var number = integer - 1;
+	var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+	if(typeof integer !== 'number') {
+		throw 'Invalid input';
+	}
+	return months[number];
+}
 /*
  * PROBLEM `randomElement`: (normal)
  * Create a function called `randomElement` that takes an array of values and
  * returns one randomly selected value from that array.
  */
+ function randomElement(array) {
+ 	if (typeof array !== 'object') {
+ 		return 'Invalid input';
+ 	}
+ 	return array[Math.floor(Math.random() * array.length)];
+ }
 
 /*
  * PROBLEM `studentPairs`: (normal)
@@ -110,6 +149,47 @@ function absVal(integer) {
  * student names and returns an array of randomly selected pairs of students
  * (array of arrays).
  */
+function studentPairs(studentNames) {
+	if(!_.isArray(studentNames)) {
+		throw 'Invalid input';
+	}
+
+	for(var studentNumber = 0; studentNumber < studentNames.length; studentNumber++) {
+		var currentStudent = studentNames[studentNumber];
+		if(!_.isString(currentStudent)) {
+			throw 'Invalid input: student must be a string';
+		}
+	}
+
+	var pairs = [];
+
+	var max = Math.floor(studentNames.length/2);
+
+	for(var pairNum = 0; pairNum < max; pairNum++) {
+		var studentNumber1 = getRandomInt(0, studentNames.length-1);
+		var studentName1 = studentNames.splice(studentNumber1, 1);
+
+		var studentNumber2 = getRandomInt(0, studentNames.length-1);
+		var studentName2 = studentNames.splice(studentNumber2, 1);
+
+		// pairs.push([
+		// 	studentName1[0],
+		// 	studentName2[0]
+		// ]);
+		pairs.push(studentName1.concat(studentName2));
+	}
+
+	if(studentNames.length > 0) {
+		var pairNumber = getRandomInt(0, pairs.length-1);
+		pairs[pairNumber].push(studentNames[0]);
+	}
+
+	function getRandomInt(min, max) {
+		return Math.floor(Math.random() * (max - min + 1)) + min;
+	}
+
+	return pairs;
+}
 
 /*
  * PROBLEM `sumSquares`: (normal)
@@ -118,7 +198,19 @@ function absVal(integer) {
  *
  * If the input is invalid throw an 'Invalid Input' exception.
  */
-
+function sumSquares(integer) {
+	if (typeof integer !== 'number') {
+		throw 'Invalid input'
+	}
+	var sum = []
+	for (var i = 0; i < integer; i++) {
+		sum.push(Math.pow(integer[i], 2));
+	};
+	for (var j = 0; j < sum.length; j++) {
+		sum[j] += sum[j]
+	}
+	return sum[j]
+}
 /* 
  * PROBLEM `findMaxDiff`: (normal)
  * Given an array of integers, write a function called `findMaxDiff` that finds
@@ -126,7 +218,14 @@ function absVal(integer) {
  *
  * If the input is invalid throw an 'Invalid Input' exception.
  */
-
+function findMaxDiff(array) {
+	var diff = [];
+	for(var i = 0; i < array.length - 1; i++) {
+		diff.push(array[i+1] - array[i]);
+		}
+	var sorted = diff.sort();
+	return sorted[sorted.length -1];
+}
 /*
  * PROBLEM `insertDashes`: (normal)
  * Write a function called `insertDashes` that transforms a given sentence into
@@ -135,7 +234,12 @@ function absVal(integer) {
  *
  * If the input is invalid throw an 'Invalid Input' exception.
  */
-
+function insertDashes(string) {
+	var arra = [];
+	string.push('-');
+	var dash = arra.join('');
+	return dash;
+}
 /*
  * PROBLEM `mySubstring`: (normal)
  * Implement a function called `mySubstring` that can output the substring of
@@ -147,7 +251,16 @@ function absVal(integer) {
  *
  * If the input is invalid throw an 'Invalid Input' exception.
  */
-
+function mySubstring(string, a, b) {
+	var sub = []
+	var array = string.split('');
+	for(var i = 0; i < array.length; i++) {
+		if(array[i] >= a && array[i] <= b) {
+			sub.push(array[i]);
+		}
+	}
+	return sub.join('');
+}
 /*
  * PROBLEM `splitSwap`: (hard)
  * Write a function called `splitSwap` that swaps two halves of a given array.

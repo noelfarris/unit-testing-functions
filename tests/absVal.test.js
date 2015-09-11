@@ -6,7 +6,7 @@ describe('absVal', function() {
 	it('should exist', function() {
 		expect(functions.absVal).not.to.be.undefined;
 	});
-	it('should return false if input is invalid', function() {
+	it('should throw error if input is invalid', function() {
 		expect(function() {
 		expect(functions.absVal('1, 2')).to.throw('Invalid input');
 		})
